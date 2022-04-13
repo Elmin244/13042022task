@@ -1,0 +1,39 @@
+CREATE DATABASE SCHOOL
+USE SCHOOL
+Create table Groups
+(
+  ID INT PRIMARY KEY IDENTITY,
+  NO NVARCHAR(10) NOT NULL,
+)
+Create table Students
+(
+  ID INT PRIMARY KEY IDENTITY,
+  NAME NVARCHAR(20) NOT NULL,
+  SURNAME NVARCHAR(20)NOT NULL,
+  GROUPID INT FOREIGN KEY REFERENCES Groups(ID)
+)
+Create table Subjects
+( ID INT PRIMARY KEY IDENTITY,
+  NAME NVARCHAR(20) NOT NULL,
+)
+CREATE TABLE Exams
+(  ID INT PRIMARY KEY IDENTITY,
+   SUBJECTID INT FOREIGN KEY REFERENCES Subjects(ID),
+   DATE DATETIME NOT NULL DEFAULT(GETDATE())
+)
+Create table StudentsExams
+( ID INT PRIMARY KEY IDENTITY,
+ STUDENTID INT FOREIGN KEY REFERENCES Students(ID),
+  EXAMID INT FOREIGN KEY REFERENCES Exams(ID),
+  Result TINYINT
+)
+
+Insert into Groups
+Values(201),
+(202),
+(203)
+Insert into Students
+Values ('Elmin','Huseynli',201),
+('Elekber','Hesenli',202),
+('Senan','Bayramli',202),
+('Seymur','Seymurov',203)
